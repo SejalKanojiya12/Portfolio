@@ -1,0 +1,484 @@
+﻿<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sejal Kanojiya | Full Stack Developer</title>
+
+  <!-- Font Awesome (icons) -->
+  <link href="all.min.css" rel="stylesheet">
+
+  <style>
+  :root{
+    --bg:#0b0b0b; --panel:#111; --muted:#b7b7b7; --fg:#fff;
+    --primary:#ef233c; --cyan:#00fff7; --card:#151515; --border:#222;
+    --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:Inter, Poppins, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background: radial-gradient(1200px 600px at 80% -10%, rgba(239,35,60,.12), transparent 60%),
+                radial-gradient(1000px 500px at -10% 100%, rgba(0,255,247,.06), transparent 60%),
+                var(--bg); color:var(--fg);
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+  a{color:inherit; text-decoration:none}
+  .container{width:min(1120px,94%); margin:0 auto; padding:0 8px}
+
+/* Header */
+header{
+  position:sticky; top:0; z-index:1000; backdrop-filter:saturate(180%) blur(8px);
+  background:linear-gradient(180deg, rgba(10,10,10,.92), rgba(10,10,10,.6));
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between; padding:14px 0;
+}
+.brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px}
+.brand i{color:var(--primary)}
+nav a{
+  text-decoration:none; margin:0 12px; color:var(--muted); font-weight:600; font-size:0.95rem;
+  position:relative; padding:6px 4px;
+}
+nav a:after{
+  content:""; position:absolute; left:0; bottom:-8px; height:2px; width:0; background:var(--primary);
+  transition:.22s ease;
+}
+nav a:hover{color:#fff}
+nav a:hover:after{width:100%}
+.menu-btn{display:none; border:1px solid var(--border); background:#0e0e0e; color:#fff; padding:8px 10px; border-radius:10px}
+
+/* Hero */
+section{padding:72px 0}
+.hero{display:grid; grid-template-columns:1.25fr .9fr; gap:32px; align-items:center}
+.tag{
+  display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+  background:rgba(239,35,60,.10); color:#ffd7dc; border:1px solid rgba(239,35,60,.18); font-weight:700; font-size:.88rem;
+}
+.title{
+  font-size:clamp(32px, 5.5vw, 50px); line-height:1.03; margin:12px 0 10px;
+}
+.title .hl{color:#fff; background:linear-gradient(90deg,#fff, #ffb3bc 40%, #ff4757 70%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.subtitle{color:var(--muted); font-size:1.03rem}
+.cta{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap}
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  border:none; cursor:pointer; padding:12px 18px; border-radius:12px; font-weight:700; letter-spacing:.3px;
+  background:var(--primary); color:#fff; box-shadow:0 8px 20px rgba(239,35,60,.25); transition:transform .15s ease, box-shadow .25s ease;
+}
+.btn:hover{transform:translateY(-3px); box-shadow:0 14px 28px rgba(239,35,60,.35)}
+.btn.outline{background:transparent; border:1px solid var(--border); color:#fff}
+.hero-card{
+  position:relative; background:linear-gradient(180deg,#141414,#0e0e0e);
+  border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.hero-card img{
+  width:100%; display:block; border-radius:14px; filter:grayscale(100%); transition:filter .4s ease, transform .4s ease;
+  border:1px solid var(--border);
+}
+.hero-card:hover img{filter:grayscale(8%); transform:scale(1.02)}
+.badges{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+.badges .chip{padding:6px 10px; border:1px dashed #2a2a2a; border-radius:999px; font-size:.83rem; color:#d7d7d7}
+
+/* Section titles */
+.section-head{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:16px}
+.section-head h2{margin:0; font-size:clamp(20px,3.8vw,30px)}
+.section-head p{color:var(--muted); margin:4px 0 0}
+
+/* Cards */
+.grid{display:grid; gap:16px}
+.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; position:relative;
+  transition:transform .18s ease, box-shadow .22s ease, border-color .2s ease; overflow:hidden;
+}
+.card:hover{transform:translateY(-6px); box-shadow:0 18px 36px rgba(0,0,0,.45); border-color:#2b2b2b}
+.card .icon{
+  height:44px; width:44px; display:grid; place-items:center; border-radius:10px; background:rgba(239,35,60,.12);
+  color:#ffb3bc; margin-bottom:10px;
+}
+.card p{color:#cfcfcf}
+
+/* Timeline */
+.timeline{border-left:2px dashed #2a2a2a; margin-left:8px; padding-left:14px}
+.time-item{position:relative; margin:0 0 16px 0}
+.time-item:before{
+  content:""; position:absolute; left:-24px; top:6px; height:12px; width:12px; border-radius:50%;
+  background:var(--primary); box-shadow:0 0 0 4px rgba(239,35,60,.12);
+}
+
+/* Stats */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+.stat{
+  text-align:center; background:#0f0f0f; border:1px solid var(--border); border-radius:12px; padding:18px 10px
+}
+.stat h3{margin:0; font-size:24px}
+.stat p{margin:6px 0 0; color:#bdbdbd}
+
+/* Contact */
+.contact{
+  display:grid; grid-template-columns:1.2fr .8fr; gap:16px; align-items:stretch;
+}
+.panel{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px}
+
+/* Footer */
+footer{border-top:1px solid rgba(255,255,255,.04); padding:26px 0; color:#c9c9c9}
+
+/* Reveal + utilities */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .62s ease, transform .62s ease}
+.reveal.show{opacity:1; transform:none}
+.small{font-size:.92rem; color:#cfcfcf}
+.muted{color:var(--muted)}
+.row{display:flex; gap:10px; flex-wrap:wrap}
+
+/* Responsive */
+@media (max-width:1000px){ .hero{grid-template-columns:1fr} .grid.cols-3{grid-template-columns:repeat(2,1fr)} .contact{grid-template-columns:1fr} .stats{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:640px){
+  nav{display:none}
+  .menu-btn{display:inline-flex}
+  .grid.cols-3,.grid.cols-2{grid-template-columns:1fr}
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand"><i class="fa-solid fa-code"></i> Sejal Kanojiya</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="openMenu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<!-- Mobile quick menu -->
+<div id="mobileMenu" style="display:none; position:fixed; inset:58px 10px auto; background:#0f0f0f; border:1px solid #222; border-radius:12px; z-index:999;">
+  <div class="container" style="padding:12px 14px">
+    <div class="row">
+      <a class="btn outline" href="#home">Home</a>
+      <a class="btn outline" href="#about">About</a>
+      <a class="btn outline" href="#skills">Skills</a>
+      <a class="btn outline" href="#projects">Projects</a>
+      <a class="btn outline" href="#experience">Experience</a>
+      <a class="btn outline" href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero container">
+  <div>
+    <span class="tag"><i class="fa-solid fa-bolt"></i> Full Stack Developer</span>
+    <h1 class="title reveal show">Hello, I’m <span class="hl">Sejal Kanojiya</span></h1>
+    <p class="subtitle small reveal show">
+      Building responsive, maintainable web applications with a focus on performance and clean code.
+    </p>
+    <div class="cta reveal show">
+      <a class="btn" href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+      <a class="btn outline" href="https://linkedin.com/in/sejal-kanojiya-262455300" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      <a class="btn outline" href="resume.pdf" download><i class="fa-solid fa-download"></i> Download Resume</a>
+    </div>
+    <div class="badges reveal show">
+      <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+      <span class="chip">Tailwind</span><span class="chip">Bootstrap</span><span class="chip">Angular</span>
+      <span class="chip">PHP</span>
+    </div>
+  </div>
+
+  <div class="hero-card reveal show" style="max-width:420px">
+    <img src="../../Downloads/WhatsApp Image 2025-10-07 at 09.43.53.jpeg" alt="Sejal portrait (grayscale with accent)">
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="container">
+  <div class="section-head">
+    <h2>About <span style="color:var(--primary)">Me</span></h2>
+    <p class="muted">Who I am &amp; what I deliver</p>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-user"></i></div>
+      <h3>Summary</h3>
+      <p>
+        Full Stack Developer (B.Tech IT, 2024) focused on delivering reliable, accessible web applications.
+        Experienced in process-driven collaboration and building team projects end-to-end.
+      </p>
+      <div class="row small muted"><i class="fa-solid fa-location-dot"></i> Jabalpur, Madhya Pradesh, India</div>
+    </div>
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+      <h3>Approach</h3>
+      <p>
+        Pragmatic development with emphasis on responsive interfaces, maintainable code, and effective teamwork.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="container">
+  <div class="section-head">
+    <h2>Skills &amp; Tools</h2>
+    <p class="muted">Current technical focus</p>
+  </div>
+
+  <div class="grid cols-3">
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-code"></i></div>
+      <h3>Frontend</h3>
+      <p>HTML, CSS, JavaScript, Tailwind CSS, Bootstrap, Angular</p>
+    </div>
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-server"></i></div>
+      <h3>Backend & Databases</h3>
+      <p>PHP, MySQL — building full-stack features and CRUD workflows</p>
+    </div>
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-tools"></i></div>
+      <h3>Tools & Practices</h3>
+      <p>Git, GitHub, Responsive Design, RESTful APIs, Agile collaboration</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="container">
+  <div class="section-head">
+    <h2>Featured Projects</h2>
+    <p class="muted">Representative work</p>
+  </div>
+
+  <div class="grid cols-2">
+    <article class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-railway"></i></div>
+      <h3>IRCTC — Railway Ticket Booking (College Project)</h3>
+      <p>
+        Full-stack team project: implemented user registration, train search, booking flow, and booking management.
+        Frontend built with HTML, CSS, JavaScript; styling with Tailwind and Bootstrap; backend with PHP & MySQL.
+      </p>
+      <div class="row small muted"><i class="fa-solid fa-gears"></i> HTML • CSS • JavaScript • PHP • MySQL • Tailwind • Bootstrap • Angular</div>
+    </article>
+
+    <article class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-project-diagram"></i></div>
+      <h3>TrackTalk — Real-Time Conversation Tracker</h3>
+      <p>
+        Location-aware communication demo with geolocation updates and mobile-first responsive UI.
+      </p>
+      <div class="row small muted"><i class="fa-solid fa-gears"></i> JavaScript • Geolocation API • Responsive UI</div>
+    </article>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="container">
+  <div class="section-head">
+    <h2>Experience</h2>
+    <p class="muted">Where I learned by doing</p>
+  </div>
+  <div class="panel reveal show">
+    <div class="timeline">
+      <div class="time-item">
+        <h3>Arohan Financial Services Limited <span class="small muted">— May 2024 – Sept 2024</span></h3>
+        <p class="small">
+          Customer Service Representative — Managed client onboarding, documentation verification and data management.
+          Processed and updated customer data in Excel and CRM tools, maintained accurate records, and collaborated with teams to streamline processes.
+        </p>
+      </div>
+
+      <div class="time-item">
+        <h3>IRCTC Railway Ticket Booking Clone (Team Project) <span class="small muted">— In College</span></h3>
+        <p class="small">
+          Developed a full-stack ticket booking system with a team of four: user accounts, search & booking flows, booking management.
+          Implemented responsive UI, secure forms, and backend booking persistence using PHP & MySQL; version control via GitHub.
+        </p>
+      </div>
+
+      <div class="time-item">
+        <h3>Full Stack Developer Training — ACST Institute <span class="small muted">— July 2025 – Present</span></h3>
+        <p class="small">
+          Ongoing training covering modern frontend and backend technologies, project-based learning and version control practices.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CERTS -->
+<section id="education" class="container">
+  <div class="section-head">
+    <h2>Education &amp; Certifications</h2>
+    <p class="muted">Academic background & credentials</p>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+      <h3>B.Tech — Information Technology (2024)</h3>
+      <p>Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV), Bhopal</p>
+    </div>
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-certificate"></i></div>
+      <h3>Certifications &amp; Achievements</h3>
+      <p class="small">
+        Full-Stack Web Development (ongoing) • NIIT IT Wizard (MS Office) • Cleared SSC Delhi Police Head Constable (AWO/TPO, 2022)
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="container">
+  <div class="section-head">
+    <h2>Contact</h2>
+    <p class="muted">Reach out for opportunities or collaborations</p>
+  </div>
+
+  <div class="contact">
+    <div class="panel reveal show">
+      <h3>Contact Info</h3>
+      <p class="small"><i class="fa-solid fa-phone"></i> 7566565105</p>
+      <p class="small"><i class="fa-solid fa-envelope"></i> <a href="mailto:sejalkanojiya890@gmail.com">sejalkanojiya890@gmail.com</a></p>
+      <p class="small"><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/sejal-kanojiya-262455300" target="_blank">linkedin.com/in/sejal-kanojiya-262455300</a></p>
+      <p class="small"><i class="fa-brands fa-github"></i> <a href="https://github.com/SejalKanojiya12/Portfolio" target="_blank">github.com/SejalKanojiya12</a></p>
+      <div class="row" style="margin-top:10px">
+        <a class="btn" href="mailto:sejalkanojiya890@gmail.com"><i class="fa-solid fa-paper-plane"></i> Email</a>
+        <a class="btn outline" href="resume.pdf" download><i class="fa-solid fa-download"></i> Download Resume</a>
+      </div>
+    </div>
+
+    <form id="contactForm" class="panel reveal show" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+      <!-- Replace YOUR_FORM_ID with your actual Formspree form id -->
+      <h3>Send a message</h3>
+      <label class="small">Name</label>
+      <input name="name" required placeholder="Your name" style="width:100%;padding:12px 14px;border-radius:10px;background:#0f0f0f;border:1px solid #222;color:#fff;margin:6px 0 10px">
+      <label class="small">Email</label>
+      <input name="email" required type="email" placeholder="you@example.com" style="width:100%;padding:12px 14px;border-radius:10px;background:#0f0f0f;border:1px solid #222;color:#fff;margin:6px 0 10px">
+      <label class="small">Message</label>
+      <textarea name="message" rows="5" required placeholder="Hi Sejal, I’d like to discuss..." style="width:100%;padding:12px 14px;border-radius:10px;background:#0f0f0f;border:1px solid #222;color:#fff;margin:6px 0 14px"></textarea>
+
+      <!-- Optional hidden fields for Formspree -->
+      <input type="hidden" name="_subject" value="Portfolio message from website">
+      <input type="hidden" name="_captcha" value="false">
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <button class="btn" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        <div id="formStatus" class="small muted" style="margin-left:6px"></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+    <div class="small muted">© 2025 Sejal Kanojiya | All Rights Reserved</div>
+    <div class="row" style="align-items:center">
+      <a class="small muted" href="resume.pdf" download style="margin-right:10px"><i class="fa-solid fa-download"></i> Resume</a>
+      <a class="small muted" href="https://linkedin.com/in/sejal-kanojiya-262455300" target="_blank" title="LinkedIn" style="margin-right:8px"><i class="fa-brands fa-linkedin"></i></a>
+      <a class="small muted" href="https://github.com/SejalKanojiya12/Portfolio" target="_blank" title="GitHub" style="margin-right:8px"><i class="fa-brands fa-github"></i></a>
+      <a class="small muted" href="mailto:sejalkanojiya890@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<a id="toTop" href="#home" title="Back to top" style="position: fixed; right: 16px; bottom: 16px; height: 44px; width: 44px; display: grid; place-items: center; background: rgb(17, 17, 17); border: 1px solid rgb(34, 34, 34); border-radius: 12px; text-decoration: none; color: rgb(255,255,255); opacity: 0; pointer-events: none; transition: 0.25s;">
+  <i class="fa-solid fa-arrow-up"></i>
+</a>
+
+<script>
+/* Mobile quick menu */
+const mBtn=document.getElementById('openMenu');
+const mMenu=document.getElementById('mobileMenu');
+mBtn && mBtn.addEventListener('click',()=>{ mMenu.style.display = mMenu.style.display==='none' ? 'block' : 'none'; });
+
+/* Reveal on scroll */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+  })
+},{threshold:.16});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* Animated counters */
+function animateCount(el){
+  const target=+el.dataset.target;
+  const dur=1200, start=0, t0=performance.now();
+  function tick(t){
+    const p=Math.min(1, (t-t0)/dur);
+    const val=Math.floor(start + (target-start)*p);
+    el.textContent=val.toLocaleString();
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const counterIO=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ animateCount(e.target); counterIO.unobserve(e.target);} })
+},{threshold:.6});
+document.querySelectorAll('.count').forEach(el=>counterIO.observe(el));
+
+/* Back-to-top visibility */
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll',()=>{
+  const show=window.scrollY>600;
+  toTop.style.opacity=show?1:0;
+  toTop.style.pointerEvents=show?'all':'none';
+});
+
+/* Smooth scroll behavior is handled by CSS scroll-behavior:smooth; optional JS can further enhance */
+
+ /* Contact form submit handling for user feedback.
+    NOTE: The form action currently points to https://formspree.io/f/YOUR_FORM_ID
+    Replace YOUR_FORM_ID with your Formspree form id. If you prefer using formsubmit.co,
+    set the form action to: https://formsubmit.co/youremail@example.com
+ */
+
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+
+if(contactForm){
+  contactForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    formStatus.textContent = 'Sending...';
+    const action = contactForm.getAttribute('action');
+    const formData = new FormData(contactForm);
+
+    try {
+      const res = await fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        formStatus.style.color = '#9fe39f';
+        formStatus.textContent = 'Message sent — thank you.';
+        contactForm.reset();
+      } else {
+        const data = await res.json();
+        formStatus.style.color = '#f5a7a7';
+        formStatus.textContent = (data?.error || 'Submission failed — please try direct email.');
+      }
+    } catch (err) {
+      formStatus.style.color = '#f5a7a7';
+      formStatus.textContent = 'Submission error. Please email: sejalkanojiya890@gmail.com';
+    }
+
+    setTimeout(()=>{ formStatus.textContent=''; formStatus.style.color=''; }, 6500);
+  });
+}
+</script>
+
+</body>
+</html>
