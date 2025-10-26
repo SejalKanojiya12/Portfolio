@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sejal Kanojiya | Portfolio</title>
+
+<link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0b0b; --panel:#111; --muted:#b7b7b7; --fg:#fff;
+  --primary:#ef233c; --cyan:#00fff7; --card:#151515; --border:#222;
+  --radius:22px; --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:Poppins,system-ui,Segoe UI,Roboto,Arial;
+  background: radial-gradient(1200px 600px at 80% -10%, rgba(239,35,60,.18), transparent 60%),
+              radial-gradient(1000px 500px at -10% 100%, rgba(0,255,247,.10), transparent 60%),
+              var(--bg); color:var(--fg);
+}
+a{color:inherit}
+.container{width:min(1120px,92%); margin:auto}
+
+/* Header */
+header{
+  position:sticky; top:0; z-index:1000; backdrop-filter:saturate(180%) blur(8px);
+  background:linear-gradient(180deg, rgba(10,10,10,.9), rgba(10,10,10,.55));
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between; padding:14px 0;
+}
+.brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.5px}
+.brand i{color:var(--primary)}
+nav a{
+  text-decoration:none; margin:0 14px; color:var(--muted); font-weight:500; position:relative;
+}
+nav a:after{
+  content:""; position:absolute; left:0; bottom:-8px; height:2px; width:0; background:var(--primary);
+  transition:.25s ease;
+}
+nav a:hover{color:#fff}
+nav a:hover:after{width:100%}
+.menu-btn{display:none; border:1px solid var(--border); background:#0e0e0e; color:#fff; padding:10px 12px; border-radius:12px}
+
+/* Hero */
+section{padding:88px 0}
+.hero{display:grid; grid-template-columns:1.2fr .9fr; gap:36px; align-items:center}
+.tag{
+  display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+  background:rgba(239,35,60,.12); color:#ffdde1; border:1px solid rgba(239,35,60,.25); font-weight:600; font-size:.88rem;
+}
+.title{
+  font-size:clamp(34px, 6vw, 58px); line-height:1.05; margin:14px 0 10px;
+}
+.title .hl{color:#fff; background:linear-gradient(90deg,#fff, #ffb3bc 40%, #ff4757 70%, #ffa5a5);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.subtitle{color:var(--muted); font-size:1.05rem}
+.cta{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
+.btn{
+  border:none; cursor:pointer; padding:12px 18px; border-radius:14px; font-weight:700; letter-spacing:.3px;
+  background:var(--primary); color:#fff; box-shadow:0 8px 20px rgba(239,35,60,.35); transition:transform .15s ease, box-shadow .25s ease;
+}
+.btn:hover{transform:translateY(-2px); box-shadow:0 14px 28px rgba(239,35,60,.45)}
+.btn.outline{background:#0e0e0e; border:1px solid var(--border); color:#fff}
+.hero-card{
+  position:relative; background:linear-gradient(180deg,#141414,#0e0e0e);
+  border:1px solid var(--border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+  overflow:hidden; isolation:isolate;
+}
+.hero-card:before{
+  content:""; position:absolute; inset:-40% -20% auto auto; height:220px; width:220px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, rgba(239,35,60,.55), transparent 60%);
+  filter:blur(20px); z-index:-1; animation:pulse 6s ease-in-out infinite;
+}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.hero-card img{
+  width:100%; display:block; border-radius:16px; filter:grayscale(100%); transition:filter .4s ease, transform .4s ease;
+  border:1px solid var(--border);
+}
+.hero-card:hover img{filter:grayscale(10%); transform:scale(1.02)}
+.badges{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+.badges .chip{padding:6px 10px; border:1px dashed #2a2a2a; border-radius:999px; font-size:.83rem; color:#d7d7d7}
+
+/* Section titles */
+.section-head{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:18px}
+.section-head h2{margin:0; font-size:clamp(22px,4vw,32px)}
+.section-head p{color:var(--muted); margin:4px 0 0}
+
+/* Cards */
+.grid{display:grid; gap:18px}
+.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; position:relative;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; overflow:hidden;
+}
+.card:hover{transform:translateY(-6px); box-shadow:0 18px 36px rgba(0,0,0,.45); border-color:#2b2b2b}
+.card .icon{
+  height:44px; width:44px; display:grid; place-items:center; border-radius:12px; background:rgba(239,35,60,.16);
+  color:#ffb3bc; margin-bottom:10px;
+}
+.card p{color:#cfcfcf}
+
+/* Timeline */
+.timeline{border-left:2px dashed #2a2a2a; margin-left:10px; padding-left:16px}
+.time-item{position:relative; margin:0 0 18px 0}
+.time-item:before{
+  content:""; position:absolute; left:-24px; top:4px; height:12px; width:12px; border-radius:50%;
+  background:var(--primary); box-shadow:0 0 0 4px rgba(239,35,60,.18);
+}
+
+/* Stats */
+.stats{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+.stat{
+  text-align:center; background:#0f0f0f; border:1px solid var(--border); border-radius:16px; padding:22px 10px
+}
+.stat h3{margin:0; font-size:28px}
+.stat p{margin:6px 0 0; color:#bdbdbd}
+
+/* Contact */
+.contact{
+  display:grid; grid-template-columns:1.2fr .8fr; gap:18px; align-items:stretch;
+}
+.panel{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px}
+
+/* Footer */
+footer{border-top:1px solid rgba(255,255,255,.06); padding:28px 0; color:#c9c9c9}
+
+/* Reveal + utilities */
+.reveal{opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease}
+.reveal.show{opacity:1; transform:none}
+.small{font-size:.92rem; color:#cfcfcf}
+.muted{color:var(--muted)}
+.row{display:flex; gap:10px; flex-wrap:wrap}
+
+/* Responsive */
+@media (max-width:1000px){ .hero{grid-template-columns:1fr} .grid.cols-3{grid-template-columns:repeat(2,1fr)} .contact{grid-template-columns:1fr}}
+@media (max-width:640px){
+  nav{display:none}
+  .menu-btn{display:inline-flex}
+  .grid.cols-3,.grid.cols-2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand"><i class="fa-solid fa-code"></i> Sejal Kanojiya</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="openMenu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<div id="mobileMenu" style="display:none; position:fixed; inset:58px 10px auto; background:#0f0f0f; border:1px solid #222; border-radius:16px; z-index:999;">
+  <div class="container" style="padding:14px 16px">
+    <div class="row">
+      <a class="btn outline" href="#home">Home</a>
+      <a class="btn outline" href="#about">About</a>
+      <a class="btn outline" href="#skills">Skills</a>
+      <a class="btn outline" href="#projects">Projects</a>
+      <a class="btn outline" href="#experience">Experience</a>
+      <a class="btn outline" href="#education">Education</a>
+      <a class="btn outline" href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero container">
+  <div>
+    <span class="tag"><i class="fa-solid fa-bolt"></i> Full Stack Developer</span>
+    <h1 class="title reveal show">Hello, my name is <span class="hl">Sejal Kanojiya</span></h1>
+    <p class="subtitle small reveal show">
+      I build secure, responsive and user-focused web apps. Passionate about privacy-first design, performance optimization and delightful UI.
+    </p>
+    <div class="cta reveal show">
+      <a class="btn" href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+      <a class="btn outline" href="https://linkedin.com/in/sejal-kanojiya-262455300" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+    </div>
+    <div class="badges reveal show">
+      <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript</span>
+      <span class="chip">Bootstrap</span><span class="chip">Tailwind</span><span class="chip">Angular JS</span>
+      <span class="chip">Jquery</span><span class="chip">MySQL</span><span class="chip">PHP</span>
+    </div>
+  </div>
+
+  <div class="hero-card reveal show">
+    <img src="../../Downloads/Sejal Kanojiya Professional Pic.jpeg" alt="Sejal portrait" height="500" width="400">
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="container">
+  <div class="section-head">
+    <h2>About <span style="color:var(--primary)">Me</span></h2>
+    <p class="muted">Who I am &amp; what I love</p>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-user"></i></div>
+      <h3>Professional Summary</h3>
+      <p>
+        Enthusiastic Frontend Developer (B.Tech IT, 2024) with hands-on experience building accessible, secure interfaces.
+        Adept at cross-browser compatibility, performance tweaks, and clean, maintainable code.
+      </p>
+      <div class="row small muted"><i class="fa-solid fa-location-dot"></i> Jabalpur, Madhya Pradesh, India</div>
+    </div>
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-heart-pulse"></i></div>
+      <h3>What drives me</h3>
+      <p>
+        Privacy-first platforms, human-centered UX, and meaningful problem solving. I enjoy turning ideas into
+        polished experiences with a balance of <em>speed, security, and style</em>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="container">
+  <div class="section-head">
+    <h2>My <span style="color:var(--primary)">Skills</span></h2>
+    <p class="muted">Tools &amp; superpowers</p>
+  </div>
+
+  <div class="grid cols-3">
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-palette"></i></div>
+      <h3>Frontend</h3>
+      <p>HTML5, CSS3,Angular JS (ES6+), Responsive Design, Bootstrap, Tailwind CSS</p>
+    </div>
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-code"></i></div>
+      <h3>Frameworks &amp; Tools</h3>
+      <p>Git, GitHub, VS Code, React,Jquery </p>
+    </div>
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-database"></i></div>
+      <h3>Backend &amp; Data (Basic)</h3>
+      <p>PHP, MySQL, MongoDB • Plus: MS Excel</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="container">
+  <div class="section-head">
+    <h2>Featured <span style="color:var(--primary)">Projects</span></h2>
+    <p class="muted">Hover to feel the glow</p>
+  </div>
+
+  <div class="grid cols-2">
+    <article class="card reveal show" style="overflow:hidden">
+      <div class="icon"><i class="fa-solid fa-shield-heart"></i></div>
+      <h3>Safe Space — Online Support Platform</h3>
+      <p>
+        FeelFree is a secure, anonymous platform where users can share their feelings, experiences, and stories without fear of judgment.
+        The platform allows real-time chatting, story posting, and journaling, ensuring privacy-first interactions.
+        Designed with accessibility, responsive UI, and performance in mind, it helps users find emotional support and community safely.
+      </p>
+      <div class="row small muted"><i class="fa-solid fa-gears"></i> HTML • CSS • JavaScript • Bootstrap • AngularJS • Tailwind CSS • PHP</div>
+     </article>
+      
+    <article class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-route"></i></div>
+      <h3>Spice & Flavour — Restaurant Website</h3>
+      <p>
+       Developed a full-stack responsive website for a modern restaurant serving Pav Bhaji, Paneer Tikka, and Ferrero Rocher desserts. 
+       Features include dynamic menu display, “Add to Cart” functionality, and secure online payment integration. 
+       Built using HTML, CSS, JavaScript, AngularJS, Bootstrap, Tailwind CSS, and PHP for interactive UI and smooth user experience.
+      </p>
+      <div class="row small muted"><i class="fa-solid fa-gears"></i> HTML • CSS • JS • AngularJS • Tailwind • Bootstrap • PHP • Payment Integration</div>
+    </article>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="container">
+  <div class="section-head">
+    <h2>Internship <span style="color:var(--primary)">Experience</span></h2>
+    <p class="muted">Where I learned by doing</p>
+  </div>
+  <div class="panel reveal show">
+    <div class="timeline">
+      <div class="time-item">
+        <h3>Arohan Financial Services Limited <span class="small muted">— May 2024 – Sept 2024</span></h3>
+        <p class="small">
+             Customer Service Representative — Business Department (Loan Services). 
+             Managed client inquiries and processed loan documentation. 
+             Maintained structured client data, tracked operational workflows, and collaborated with the team to improve efficiency. 
+             Gained transferable skills in data handling, analytical thinking, and problem-solving — relevant for designing and managing full-stack applications.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CERTS -->
+<section id="education" class="container">
+  <div class="section-head">
+    <h2>Education &amp; <span style="color:var(--primary)">Certifications</span></h2>
+    <p class="muted">Always learning</p>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+      <h3>B.Tech — Information Technology (2024)</h3>
+      <p>Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV), Bhopal</p>
+    </div>
+    <div class="card reveal show">
+      <div class="icon"><i class="fa-solid fa-certificate"></i></div>
+      <h3>Certifications &amp; Achievements</h3>
+      <p class="small">
+      
+        Full-Stack Web Development •
+        Cleared SSC Delhi Police Head Constable (AWO/TPO, 2022)•
+        NIIT IT Wizard (MS Office, Internet, Basics) •
+        District-level Karate &amp; Yoga – Jabalpur
+      </p>
+    </div>
+  </div>
+</section>
+  
+<!-- CONTACT -->
+<section id="contact" class="container">
+  <div class="section-head">
+    <h2>Let’s <span style="color:var(--primary)">Connect</span></h2>
+    <p class="muted">I reply fast :)</p>
+  </div>
+
+  <div class="contact">
+    <!-- Contact Info Panel -->
+    <div class="panel reveal show">
+      <h3>Contact Info</h3>
+      <p class="small"><i class="fa-solid fa-phone"></i> 7566565105</p>
+      <p class="small"><i class="fa-solid fa-envelope"></i> sejalkanojiya890@gmail.com</p>
+      <p class="small"><i class="fa-brands fa-linkedin"></i> 
+        <a href="https://linkedin.com/in/sejal-kanojiya-262455300" target="_blank">linkedin.com/in/sejal-kanojiya-262455300</a>
+      </p>
+      <div class="row" style="margin-top:10px">
+        <a class="btn" href="mailto:sejalkanojiya890@gmail.com"><i class="fa-solid fa-paper-plane"></i> Email me</a>
+        <a class="btn outline" href="https://wa.me/917566565105" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Quick Message Form -->
+<form class="panel reveal show" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+  <h3>Quick Message</h3>
+
+  <label class="small">Name</label>
+  <input required name="name" placeholder="Your name">
+
+  <label class="small">Email</label>
+  <input required type="email" name="email" placeholder="you@example.com">
+
+  <label class="small">Message</label>
+  <textarea rows="4" required name="message" placeholder="Hi Sejal, I’d like to work with you…"></textarea>
+
+  <button class="btn" type="submit">Send Message</button>
+</form>
+
+  </div>
+</section>
+
+
+<footer class="container reveal show">
+<p class="small muted" style="text-align:center">© 2025 Sejal Kanojiya • Designed with passion</p>
+</footer>
+
+<script src="{{ asset('js/all.min.js') }}"></script>
+<script>
+  // Mobile Menu Toggle
+  const menuBtn = document.getElementById('openMenu');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click',()=>{ mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none' });
+
+
+  // Reveal animations on scroll
+  const reveals=document.querySelectorAll('.reveal');
+  window.addEventListener('scroll',()=>{
+    const triggerBottom=window.innerHeight*0.85;
+    reveals.forEach(r=>{
+      const box=r.getBoundingClientRect().top;
+      if(box<triggerBottom) r.classList.add('show');
+    });
+  });
+</script>
+
+</body>
+</html>
+
